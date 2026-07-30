@@ -1,0 +1,32 @@
+<!-- navigation bar. contains logo and name on top left, followed by "Status" and "Request" Botton to the right. On the top right is the user profile. -->
+
+<mat-toolbar>
+    <img src="/leave-logo.webp" alt="logo">
+    <button matButton routerLink="/login">
+        <h2>
+        <span class="nav-title-leave">Leave</span>
+        <span class="nav-title-app">App</span>
+        </h2>
+        
+    </button>
+    <button mat-button (click)="toApprover()" [class.button-active]="router.url === '/approver'">Approval</button>
+    <span class="example-spacer"></span>
+    <button mat-button class="profile-menu-trigger" [matMenuTriggerFor]="profileMenu" aria-label="Open profile menu">
+      <mat-icon class="profile-icon">account_circle</mat-icon>
+      <span class="profile-name">{{ username }}</span>
+    </button>
+
+    <mat-menu #profileMenu="matMenu">
+      <div class="profile-menu-header">
+        <mat-icon>account_circle</mat-icon>
+        <div>
+          <strong>{{ username }}</strong>
+          <small>View account actions</small>
+        </div>
+      </div>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon class="menu-item-icon">logout</mat-icon>
+        Logout
+      </button>
+    </mat-menu>
+</mat-toolbar>

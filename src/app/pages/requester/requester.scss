@@ -1,0 +1,11 @@
+.requester-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #f5f7ff, #e6eefc);
+}
+
+.requester-content {
+  flex: 1;
+  padding: 24px;
+}

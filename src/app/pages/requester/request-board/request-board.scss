@@ -1,0 +1,257 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.dashboard-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.dashboard-header h2,
+.card-label,
+.summary-card h3,
+.table-card h3,
+.details-panel h4 {
+  margin: 0;
+}
+
+button.new-request-btn {
+  background-color: #2563eb;
+  font-weight: 600;
+  padding: 10px 16px;
+  margin-bottom: 8px;
+}
+
+// button for export features, would be placed next to the new request button on the left
+button.export-btn {
+  background-color: white;
+  color: #2563eb;
+  border: 1px solid #2563eb;
+  font-weight: 600;
+  padding: 10px 16px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  // add download or export button icon in front of the text inside the button
+  
+}
+
+.percentage {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.summary-card,
+.table-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+  padding: 24px;
+}
+
+.summary-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 12px;
+}
+
+.card-label {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.pill_available {
+  background: #e0fee7;
+  border-radius: 999px;
+  color: #00ad4e;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 10px;
+}
+
+.pill_spent {
+  background: #fee0e0;
+  border-radius: 999px;
+  color: #d10000;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 10px;
+}
+// Stylings for status pills
+.status-pill,
+.type-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  min-width: 98px;
+  padding: 6px 10px;
+  text-transform: uppercase;
+}
+
+.status-approved {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.status-rejected {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status-cancelled {
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+.type-pill {
+  background: #dbeafe;
+  color: #1d4ed8;
+  min-width: 110px;
+}
+
+.progress-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.progress-bar {
+  --mdc-linear-progress-active-indicator-color: #2563eb; 
+}
+
+.progress-row span {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.summary-foot {
+  color: #475569;
+  margin: 12px 0 0;
+}
+
+.table-card-header {
+  margin-bottom: 16px;
+}
+
+// Make the table scrollable horizontally and vertically
+.table-wrapper {
+  max-height: 40vh;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.leave-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.leave-table th,
+.leave-table td {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 12px 10px;
+  text-align: left;
+}
+
+.leave-table th {
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.leave-table tbody tr {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.leave-table tbody tr:hover,
+.leave-table tbody tr.active {
+  background: #eff6ff;
+}
+
+.details-panel {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  margin-top: 16px;
+  padding: 16px;
+}
+
+.details-panel p {
+  margin: 6px 0;
+  color: #475569;
+}
+
+@media (max-width: 768px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+// tr:hover {
+//     background-color: #e0e6ff;
+//     cursor: pointer;
+// }
+
+.mat-mdc-header-cell {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.mat-mdc-header-cell:hover {
+    background-color: #e0e6ff;
+}
+
+.mat-mdc-row {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.mat-mdc-row:hover {
+    background-color: #e0e6ff;
+    cursor: pointer;
+}
+
+.days_remaining {
+    font-size: xx-large;
+}

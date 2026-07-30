@@ -1,0 +1,14 @@
+.hero {
+    position: relative;
+    height: 75vh;
+    background: url('/dark-city.jpg') no-repeat center center/cover;
+    background-image: rgba(0, 0, 0, 0), url('/dark-city.jpg');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    color: aliceblue;
+    font-size: 300%;
+}

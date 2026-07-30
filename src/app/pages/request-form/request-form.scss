@@ -1,0 +1,13 @@
+.request-form-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #f5f7ff, #e6eefc);
+}
+
+.request-form-content {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}

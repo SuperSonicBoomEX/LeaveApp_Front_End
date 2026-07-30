@@ -1,0 +1,133 @@
+<section class="request-details-page">
+  <app-nav-bar-approver></app-nav-bar-approver>
+
+  <div class="request-details-content">
+    <h2>Request Details #{{ leaveRequest?.id }}</h2>
+    <ng-container *ngIf="leaveRequest; else notFound">
+      <div class="status-panel">
+        <mat-stepper
+          [linear]="false"
+          [selectedIndex]="currentStep"
+          class="request-stepper"
+          [disableRipple]="true"
+        >
+          <mat-step label="Request Submitted" [editable]="false"></mat-step>
+          <mat-step label="Waiting for Approver" [editable]="false"></mat-step>
+
+          @if (isParentalLeave) {
+            <mat-step label="Waiting for Manager" [editable]="false"></mat-step>
+          }
+
+          <mat-step label="Completed" [editable]="false"></mat-step>
+        </mat-stepper>
+        <div>
+          <strong> Status : </strong>
+          <span [class]="getStatusClass(leaveRequest.status)">{{
+            getStatusLabel(leaveRequest.status)
+          }}</span>
+        </div>
+      </div>
+
+      <div class="details-layout">
+        <div class="details-card">
+          <div><strong>Employee ID</strong></div>
+          <div>{{ leaveRequest.employeeId }}</div>
+
+          <div><strong>Type</strong></div>
+          <div>
+            <span [class]="getTypeClass(leaveRequest.leaveType)">{{
+              getTypeLabel(leaveRequest.leaveType)
+            }}</span>
+          </div>
+
+          <div><strong>Start Date</strong></div>
+          <div>{{ formatDate(leaveRequest.startDate) }}</div>
+
+          <div><strong>End Date</strong></div>
+          <div>{{ formatDate(leaveRequest.endDate) }}</div>
+
+          <div><strong>Days</strong></div>
+          <div>{{ leaveRequest.days }} Day(s)</div>
+
+          <div><strong>Reason</strong></div>
+          <div class="reason">{{ leaveRequest.reason || '-' }}</div>
+
+          <div><strong>Submitted Date</strong></div>
+          <div>{{ formatDate(leaveRequest.createdAt) }}</div>
+
+          <div><strong>Decided By</strong></div>
+          <div>{{ leaveRequest.decidedBy || '-' }}</div>
+
+          <div><strong>Decided At</strong></div>
+          <div>
+            {{ leaveRequest.decidedAt ? formatDate(leaveRequest.decidedAt) : '-' }}
+          </div>
+
+          <div class="form-actions" *ngIf="leaveRequest?.status === 'PENDING'">
+            <button
+              matButton="filled"
+              type="submit"
+              class="approve-button"
+              (click)="approveRequest()"
+            >
+              Approve
+            </button>
+            <button
+              matButton="filled"
+              type="submit"
+              class="reject-button"
+              (click)="rejectRequest()"
+            >
+              Reject
+            </button>
+            <button matButton="outlined" type="button" class="go-back-button" (click)="goBack()">
+              Go Back
+            </button>
+          </div>
+          <!-- <ng-template #goBackNormal>
+            <button matButton="outlined" class="go-back-button" (click)="goBack()">Go Back</button>
+          </ng-template> -->
+        </div>
+
+        <aside class="balance-impact-card">
+          <div class="card-header">
+            <p class="card-label">Balance Impact</p>
+            <h3>Leave Balance Details</h3>
+          </div>
+
+          <div class="impact-item">
+            <span class="impact-label">Leave Type</span>
+            <span class="impact-value">{{ getTypeLabel(leaveRequest.leaveType) }}</span>
+          </div>
+
+          <div class="impact-item">
+            <span class="impact-label">Reserved Days</span>
+            <span class="impact-value">{{ leaveRequest.days || 0 }} Day(s)</span>
+          </div>
+
+          <div class="impact-item">
+            <span class="impact-label">Available Days</span>
+            <span class="impact-value">{{ leaveBalance?.availableDays ?? 0 }} Day(s)</span>
+          </div>
+        </aside>
+      </div>
+    </ng-container>
+
+    <!-- <ng-container>
+      This section should be another card below the details card that shows the balance impact from this specific details card to the balance. Should include information about type of leave, reserved days or used days, and available days
+       <div class="balance-impact-card">
+        <h3>Balance Impact</h3>
+        <p><strong>Leave Type:</strong> {{ leaveRequest?.leaveType }}</p>
+        <p><strong>Reserved Days:</strong> {{ leaveBalance?.reservedDays || 0 }}</p>
+        <p><strong>Used Days:</strong> {{ leaveBalance?.usedDays || 0 }}</p>
+        <p><strong>Available Days:</strong> {{ leaveBalance?.availableDays || 0 }}</p>
+      </div>
+    </ng-container> -->
+
+    <ng-template #notFound>
+      <div class="details-card empty-state">
+        <p>Request not found.</p>
+      </div>
+    </ng-template>
+  </div>
+</section>

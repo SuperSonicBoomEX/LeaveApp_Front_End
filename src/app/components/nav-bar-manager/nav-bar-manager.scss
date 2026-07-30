@@ -1,0 +1,89 @@
+.nav-bar {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    background: white;
+}
+
+.nav-title-leave {
+    font-family: "Roboto", serif;
+    font-weight: bold;
+    color: #111827;
+}
+
+.nav-title-app {
+    font-family: "Roboto", serif;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+img {
+    width: 4rem;
+    padding-right: 0.25rem;
+    padding-left: 10%;
+}
+
+.profile-menu-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-right: 10%;
+    color: #111827;
+}
+
+.profile-name {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.profile-menu-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+}
+
+.profile-menu-header mat-icon {
+    font-size: 32px;
+    color: #2563eb;
+}
+
+.profile-icon {
+    font-size: 42px;
+    width: auto;
+    height: auto;
+}
+
+.menu-item-icon {
+    font-size: 20px;
+    width: auto;
+    height: auto;
+    margin-right: 0.75rem;
+}
+
+.profile-menu-header strong {
+    display: block;
+    font-size: 0.95rem;
+}
+
+.profile-menu-header small {
+    color: #6b7280;
+}
+
+mat-icon {
+    font-size: 35px;
+    width: 50px;
+    height: auto;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.selected {
+    background-color:#e0e6ff;
+    color: white;
+}
+
+button.button-active {
+    background-color: #e0e6ff;
+    color: #2563eb;
+}

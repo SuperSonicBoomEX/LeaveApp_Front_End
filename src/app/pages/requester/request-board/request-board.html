@@ -1,0 +1,192 @@
+<div class="dashboard-shell">
+  <div class="dashboard-header">
+    <div>
+      <p class="eyebrow">Requester portal</p>
+      <h2>Leave DashBoard</h2>
+    </div>
+    <!-- 2 buttons at the same level, one for submit form, and one for export summary -->
+    <span>
+      <!-- // add download or export button icon in front of the text inside the button -->
+      <button matButton="outlined" class="export-btn" type="button" (click)="exportSummary()">
+        <mat-icon>download</mat-icon>
+        Export Summary
+      </button>
+      <button matButton="filled" class="new-request-btn" type="button" (click)="toForm()">
+        <mat-icon>add</mat-icon>
+        New Request
+      </button>
+    </span>
+  </div>
+
+  <div class="summary-grid">
+    <article class="summary-card">
+      <div class="summary-top">
+        <div>
+          <p class="card-label">Annual Leave</p>
+          <h3>
+            <span class="days_remaining">{{ annualRemaining }}</span> days remaining
+          </h3>
+        </div>
+        <!-- Enter the function to display the status if it's available or spent -->
+        <span [class]="getSummaryStateClass(annualRemaining)">{{
+          getSummaryState(annualRemaining)
+        }}</span>
+      </div>
+
+      <div class="progress-row">
+        <mat-progress-bar
+          mode="determinate"
+          class="progress-bar"
+          [value]="annualPercentage"
+        ></mat-progress-bar>
+        <span
+          ><span class="percentage"> ({{ annualPercentage }}%) </span> {{ annualRemaining }} /
+          {{ annualTotal }} days left</span
+        >
+      </div>
+
+      <p class="summary-foot">
+        ({{ annualUsed }} Used · {{ annualReserved }} Reserved) / {{ annualTotal }} Total
+      </p>
+    </article>
+
+    <article class="summary-card">
+      <div class="summary-top">
+        <div>
+          <p class="card-label">Sick Leave</p>
+          <h3>
+            <span class="days_remaining">{{ sickRemaining }}</span> days remaining
+          </h3>
+        </div>
+        <!-- Enter the function to display the status if it's available or spent -->
+        <span [class]="getSummaryStateClass(sickRemaining)">{{
+          getSummaryState(sickRemaining)
+        }}</span>
+      </div>
+
+      <div class="progress-row">
+        <mat-progress-bar mode="determinate" [value]="sickPercentage"></mat-progress-bar>
+        <span
+          ><span class="percentage"> ({{ sickPercentage }}%) </span>{{ sickRemaining }} /
+          {{ sickTotal }} days left</span
+        >
+      </div>
+
+      <p class="summary-foot">
+        ({{ sickUsed }} Used · {{ sickReserved }} Reserved) / {{ sickTotal }} Total
+      </p>
+    </article>
+
+    <article class="summary-card">
+      <div class="summary-top">
+        <div>
+          <p class="card-label">Parental Leave</p>
+          <h3>
+            <span class="days_remaining">{{ parentalRemaining }}</span> days remaining
+          </h3>
+        </div>
+        <span [class]="getSummaryStateClass(parentalRemaining)">{{
+          getSummaryState(parentalRemaining)
+        }}</span>
+      </div>
+
+      <div class="progress-row">
+        <mat-progress-bar
+          mode="determinate"
+          class="progress-bar"
+          [value]="parentalPercentage"
+        ></mat-progress-bar>
+        <span
+          ><span class="percentage"> ({{ parentalPercentage }}%) </span> {{ parentalRemaining }} /
+          {{ parentalTotal }} days left</span
+        >
+      </div>
+
+      <p class="summary-foot">
+        ({{ parentalUsed }} Used · {{ parentalReserved }} Reserved) / {{ parentalTotal }} Total
+      </p>
+    </article>
+  </div>
+
+  <section class="table-card">
+    <div class="table-card-header">
+      <div>
+        <p class="card-label">Submitted Requests</p>
+        <h3>Leave History</h3>
+      </div>
+    </div>
+
+    <!-- Importing the model interface file and retrieve the attributes and put them in the table. The table will display the leave requests with their type, dates, duration, status, and date submitted. Each row can be clicked to select a request and view its details. -->
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="dataSource" class="leave-table" matSort>
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="type">Type</th>
+          <td mat-cell *matCellDef="let request">
+            <span [class]="getTypeClass(request.leaveType)">{{
+              getTypeLabel(request.leaveType)
+            }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Show dates of leave with a cleaner date format -->
+        <ng-container matColumnDef="dates">
+          <th mat-header-cell *matHeaderCellDef>Dates</th>
+          <td mat-cell *matCellDef="let request">
+            {{ formatDate(request.startDate) }} - {{ formatDate(request.endDate) }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="days">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="days">Days</th>
+          <td mat-cell *matCellDef="let request">{{ request.days }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="status">Status</th>
+          <td mat-cell *matCellDef="let request">
+            <span [class]="getStatusClass(request.status)">{{
+              getStatusLabel(request.status)
+            }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Show request's create time without the long giberrish texts and cleaner format -->
+        <ng-container matColumnDef="submittedDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="createdAt">Submit Date</th>
+          <td mat-cell *matCellDef="let request">{{ formatDate(request.createdAt) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="icon">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef><mat-icon>chevron_right</mat-icon></td>
+        </ng-container>
+        <!-- Keeps the header visible -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          (click)="selectRequest(row)"
+          [class.active]="selectedRequest?.id === row.id"
+        ></tr>
+      </table>
+    </div>
+
+    <!-- This is the old status dashboard at the bottom -->
+    <!-- @if (selectedRequest) {
+      <div class="details-panel">
+        <h4>{{ selectedRequest.type }} request details</h4>
+        <p>
+          <strong>Type:</strong>
+          <span [class]="getTypeClass(selectedRequest.type)">{{ getTypeLabel(selectedRequest.type) }}</span>
+        </p>
+        <p>
+          <strong>Status:</strong>
+          <span [class]="getStatusClass(selectedRequest.status)">{{ getStatusLabel(selectedRequest.status) }}</span>
+        </p>
+        <p><strong>Reason:</strong> {{ selectedRequest.reason }}</p>
+        <p><strong>Approver:</strong> {{ selectedRequest.approver }}</p>
+        <p><strong>Notes:</strong> {{ selectedRequest.notes }}</p>
+      </div>
+    } -->
+  </section>
+</div>

@@ -1,0 +1,93 @@
+<!-- This page is kind of similar to the request page dash board. Instead of having 3 boxes for status information and table of listed leaves, there will only be leave requests table that is identical to the request page's but this time including the button for viewing, approving, and rejecting the leave requests. These buttons will appear in the row of each leave request on the right most column of the table -->
+<div class="approver-board-page">
+  <div class="approver-board-header">
+    <p class="eyebrow">approver portal</p>
+    <h2>Request Queue for Approval</h2>
+  </div>
+  <section class="table-card">
+    <div class="table-card-header">
+      <div>
+        <p class="card-label">Submitted Requests</p>
+        <h3>Leave History</h3>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="dataSource" class="leave-table" matSort>
+        <ng-container matColumnDef="employee">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="employee">Employee</th>
+          <td mat-cell *matCellDef="let request">
+            <span>{{ request.employeeName }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="type" >Type</th>
+          <td mat-cell *matCellDef="let request">
+            <span [class]="getTypeClass(request.type)">{{ getTypeLabel(request.leaveType) }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dates">
+          <th mat-header-cell *matHeaderCellDef>Dates</th>
+          <td mat-cell *matCellDef="let request">
+            {{ formatDate(request.startDate) }} - {{ formatDate(request.endDate) }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="days">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="days">Days</th>
+          <td mat-cell *matCellDef="let request">{{ request.days }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="reason">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="reason">Reason</th>
+          <td mat-cell *matCellDef="let request" class="reason">
+            {{ request.reason }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="submittedDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="submittedDate">Submit Date</th>
+          <td mat-cell *matCellDef="let request">{{ formatDate(request.createdAt) }}</td>
+        </ng-container>
+
+        <!-- Buttons for approving the leave requests -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let request">
+            <button
+              matButton="outlined"
+              class="button-view"
+              (click)="viewRequest(request); $event.stopPropagation()"
+            >
+              View
+            </button>
+            <button
+              matButton="outlined"
+              class="button-approve"
+              (click)="approveRequest(request); $event.stopPropagation()"
+            >
+              Approve
+            </button>
+            <button
+              matButton="outlined"
+              class="button-reject"
+              (click)="rejectRequest(request); $event.stopPropagation()"
+            >
+              Reject
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          (click)="selectRequest(row)"
+          [class.active]="selectedRequest?.id === row.id"
+        ></tr>
+      </table>
+    </div>
+  </section>
+</div>

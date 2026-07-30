@@ -1,0 +1,92 @@
+<!-- there should be header displayed as Request For Leaving and some descriptions. Below this should contain a card form for applying leave. The form should include leave type (annual or sick) as drop down selection using mat select, start date and end date to be chosen using mat calendar, reason as an input comment using mat textarea, and lastly a submit request button and a cancel button to confirm. -->
+<div class="request-form-card">
+  <h1>Request for Leave</h1>
+  <p>Please fill out the form below to submit your leave request.</p>
+
+  <!-- The entire request form card -->
+  <form class="leave-request-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Leave Type</mat-label>
+      <!-- Drop down selection -->
+      <mat-select [(ngModel)]="leaveType" name="leaveType" required>
+        <mat-option value="ANNUAL">Annual Leave</mat-option>
+        <mat-option value="SICK">Sick Leave</mat-option>
+        <mat-option value="PARENTAL">Parental Leave</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Using date range for calendar picking -->
+    <div class="date-range">
+      <!-- Starting date -->
+      <mat-form-field appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <!-- Properties for start date calendar -->
+        <input
+          matInput
+          [matDatepicker]="startPicker"
+          [matDatepickerFilter]="weekdaysOnly"
+          [min]="today"
+          placeholder="Choose a start date"
+          (dateChange)="onStartDateChange()"
+          [(ngModel)]="startDate"
+          name="startDate"
+          required
+        />
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Ending date -->
+      <mat-form-field appearance="outline">
+        <mat-label>End Date</mat-label>
+        <!-- Properties for end date calendar -->
+        <input
+          matInput
+          [matDatepicker]="endPicker"
+          [matDatepickerFilter]="weekdaysOnly"
+          [min]="startDate ? StringtoDate(startDate) : today"
+          [disabled]="!startDate"
+          placeholder="Choose an end date"
+          [(ngModel)]="endDate"
+          name="endDate"
+          required
+        />
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <!-- Text input area for entering reasons -->
+    <mat-form-field appearance="outline">
+      <mat-label>Reason (Optional)</mat-label>
+      <textarea
+        matInput
+        placeholder="Please provide a reason for your leave request."
+        rows="4"
+        [(ngModel)]="reason"
+        maxlength="500"
+        name="reason"
+      ></textarea>
+
+      <mat-hint> Characters: {{ reason.length || 0 }}/500 </mat-hint>
+    </mat-form-field>
+
+    <div class="error-message" *ngIf="errorCode || errorMessage">
+      <h3>{{ errorMessage }}</h3>
+    </div>
+
+    <!-- Submit and cancel buttons -->
+    <div class="form-actions" (ngSubmit)="submitRequest()">
+      <button
+        matButton="filled"
+        class="subRequest"
+        type="submit"
+        (click)="submitRequest()"
+        [disabled]="isSubmitDisabled()"
+      >
+        Submit Request
+      </button>
+      <button matButton="outlined" type="button" class="canRequest" (click)="cancelRequest()">Cancel</button>
+    </div>
+  </form>
+</div>

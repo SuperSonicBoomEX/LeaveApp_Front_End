@@ -1,0 +1,55 @@
+<section class="login-page">
+  <div class="login-card">
+    <div class="brand-title" aria-label="LeaveApp">
+      <span class="brand-leave">Leave</span>
+      <span class="brand-app">App</span>
+      <!-- Using span will make it in the same line -->
+    </div>
+
+    <h1>Sign In</h1>
+    <p>Sign in as a requester or an approver.</p>
+
+    <form class="login-form" (ngSubmit)="onLogin(); submit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          id="email"
+          name="username"
+          [(ngModel)]="username"
+          type="text"
+          placeholder="Username"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          type="password"
+          placeholder="Enter your password"
+          required
+        />
+      </mat-form-field>
+
+      <div class="error-message" *ngIf="errorCode || message">
+        <h3>{{ message }}</h3>
+      </div>
+
+      <button mat-flat-button type="submit" (click)="onLogin(); submit()" [disabled]="isLoading">
+        <mat-progress-spinner
+          *ngIf="isLoading"
+          diameter="20"
+          class="custom-spinner"
+          mode="indeterminate"
+        >
+        </mat-progress-spinner>
+        <span *ngIf="!isLoading">Sign in</span>
+      </button>
+    </form>
+  </div>
+</section>
