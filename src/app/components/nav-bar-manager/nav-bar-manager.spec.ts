@@ -4,10 +4,10 @@ import '@angular/compiler';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { of } from 'rxjs';
 
-import { NavBarApprover } from './nav-bar-approver';
+import { NavBarManager } from './nav-bar-manager';
 
-describe('NavBarApprover', () => {
-  let component: NavBarApprover;
+describe('NavBarManager', () => {
+  let component: NavBarManager;
   let authService: {
     getUserId:ReturnType<typeof vi.fn>;
     getUsername: ReturnType<typeof vi.fn>;
@@ -53,7 +53,7 @@ describe('NavBarApprover', () => {
       detectChanges: vi.fn(),
     };
 
-    component = new NavBarApprover(
+    component = new NavBarManager(
       authService as any,
       employeeService as any,
       router as any,
@@ -121,8 +121,8 @@ describe('NavBarApprover', () => {
     );
   });
 
-  it('should navigate to approver on toApprover', () => {
-    component.toApprover();
-    expect(router.navigate).toHaveBeenCalledWith(['/approver']);
+  it('should navigate to manager on toManager', () => {
+    component.toManager();
+    expect(router.navigate).toHaveBeenCalledWith(['/manager']);
   });
 });
