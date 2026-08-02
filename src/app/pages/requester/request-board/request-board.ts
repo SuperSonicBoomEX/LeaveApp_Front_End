@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild, AfterViewInit } from '
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { LeaveRequest } from '../../../components/models/leave-request.model';
 import { LeaveBalance } from '../../../components/models/leave-balance.model';
 import { LeaveRequestService } from '../../../services/leave-request-service';
@@ -19,7 +19,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatProgressBarModule,
     MatTableModule,
     MatButtonModule,
-    RouterLink,
     MatIcon,
     MatSortModule,
   ],

@@ -1,22 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// @vitest-environment jsdom
+
+import '@angular/compiler';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { Approver } from './approver';
 
 describe('Approver', () => {
   let component: Approver;
-  let fixture: ComponentFixture<Approver>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [Approver],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(Approver);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
+  beforeEach(() => {
+    component = new Approver();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should be an instance of Approver', () => {
+    expect(component).toBeInstanceOf(Approver);
   });
 });

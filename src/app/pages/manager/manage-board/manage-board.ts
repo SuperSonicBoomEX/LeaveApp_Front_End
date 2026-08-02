@@ -1,17 +1,15 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { Router, RouterLink } from '@angular/router';
-import { ApproveDetails } from '../../approve-details/approve-details';
+import { Router } from '@angular/router';
 import { LeaveRequestService } from '../../../services/leave-request-service';
-import { EmployeeLeaveRequest } from '../../../components/models/employee-leave-models/employee-leave-request.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { EmployeeLeaveRequestManager } from '../../../components/models/employee-leave-models/employee-leave-request-manager.model';
 
 @Component({
   selector: 'app-manage-board',
-  imports: [MatTableModule, MatButtonModule, RouterLink, ApproveDetails, MatSortModule],
+  imports: [MatTableModule, MatButtonModule, MatSortModule],
   templateUrl: './manage-board.html',
   styleUrl: './manage-board.scss',
 })
