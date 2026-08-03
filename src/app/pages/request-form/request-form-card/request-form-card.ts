@@ -6,7 +6,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { LeaveRequestService } from '../../../services/leave-request-service';
 import { CreateLeaveRequest } from '../../../components/models/create-leave-models/create-leave-request.model';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +18,6 @@ import { HostListener } from '@angular/core';
 @Component({
   selector: 'app-request-form-card',
   imports: [
-    RouterLink,
     CommonModule,
     MatButtonModule,
     MatFormFieldModule,

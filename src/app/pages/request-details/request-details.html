@@ -70,7 +70,7 @@
             {{ leaveRequest.decidedAt ? formatDate(leaveRequest.decidedAt) : '-' }}
           </div>
 
-          <div class="form-actions" *ngIf="leaveRequest?.status === 'PENDING'; else goBackNormal">
+          <div class="form-actions" *ngIf="leaveRequest.status === 'PENDING'; else goBackNormal">
             <button
               matButton="filled"
               type="submit"
