@@ -1,22 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// @vitest-environment jsdom
+
+import '@angular/compiler';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { Grid } from './grid';
 
 describe('Grid', () => {
   let component: Grid;
-  let fixture: ComponentFixture<Grid>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [Grid],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(Grid);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
+  beforeEach(() => {
+    component = new Grid();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should be an instance of Approver', () => {
+    expect(component).toBeInstanceOf(Grid);
   });
 });
