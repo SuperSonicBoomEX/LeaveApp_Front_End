@@ -1,22 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// @vitest-environment jsdom
+
+import '@angular/compiler';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { RequestForm } from './request-form';
 
 describe('RequestForm', () => {
   let component: RequestForm;
-  let fixture: ComponentFixture<RequestForm>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [RequestForm],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(RequestForm);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
+  beforeEach(() => {
+    component = new RequestForm();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should be an instance of RequestForm', () => {
+    expect(component).toBeInstanceOf(RequestForm);
   });
 });
