@@ -1,4 +1,4 @@
-# MyAngularProject
+# LeaveApp - Leave Request Platform for Employees and Managers
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.14.
 
@@ -7,6 +7,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 To start a local development server, run:
 
 ```bash
+cd .\LeaveApp_Front_End\
 ng serve
 ```
 
